@@ -13,97 +13,92 @@ Il s’agit d’un système complet de traitement d’images, NLP, extraction d�
 🚀 Fonctionnalités principales
 🔹 1. Chargement dataset
 
-Téléchargement automatique du dataset depuis HuggingFace : DBQ/Chanel.Product.prices.Germany
-
-Ou upload d’un fichier CSV
-
-Sélection manuelle des colonnes (imageurl, title, catégories, prix)
+	* Téléchargement automatique du dataset depuis HuggingFace : DBQ/Chanel.Product.prices.Germany Ou upload d’un fichier CSV
+	* Sélection manuelle des colonnes (imageurl, title, catégories, prix)
 
 🔹 2. Nettoyage intelligent
 
-Suppression des titres vides/courts
+	* Suppression des titres vides/courts
 
-Suppression des doublons
+	* Suppression des doublons
 
-Mise en minuscules
+	* Mise en minuscules
 
-Filtrage des lignes sans images ou descriptions valides
+	* Filtrage des lignes sans images ou descriptions valides
 
 🔹 3. Téléchargement et prétraitement d’images
 
-Téléchargement des images du dataset
+	* Téléchargement des images du dataset
 
-Sauvegarde en local (data/processed_images/)
+	* Sauvegarde en local (data/processed_images/)
 
-Redimensionnement uniforme (224x224)
+	* Redimensionnement uniforme (224x224)
 
-Option d’échantillonnage
+	* Option d’échantillonnage
 
 🔹 4. Extraction des embeddings
 
-Embeddings visuels :
+	* Embeddings visuels :
 
-ResNet50 (2048D)
+		- ResNet50 (2048D)
 
-LBP (texture)
+		- LBP (texture)
 
-HOG (shape)
+		- HOG (shape)
 
-Embeddings textuels :
+	* Embeddings textuels :
 
-Sentence-BERT (all-MiniLM-L6-v2)
+		- Sentence-BERT (all-MiniLM-L6-v2)
 
-Word2Vec (self-trained)
+		- Word2Vec (self-trained)
 
-TF-IDF
+		- TF-IDF
 
 🔹 5. Recherche et recommandation
 
-Recherche par image
+	* Recherche par image
 
-Recherche par texte
+	* Recherche par texte
 
-Recherche multimodale (late fusion)
-
-KNN (FAISS ou cosine brute)
+	* Recherche par fusion multimodale ( combiné==> (Image + Texte) )
 
 Visualisation des résultats
 
 🏗 Architecture du projet
-📁 project/
-│
-├── app1.py                   # Application Streamlit complète
-├── README.md                 # Documentation du projet
-│
-├── data/
-│   ├── processed_images/     # Images prétraitées
-│   └── embeddings/           # Embeddings sauvegardés (optionnel)
-│
-└── requirements.txt          # Liste des dépendances (optionnel)
+	📁 project/
+	│
+	├── app1.py                   # Application Streamlit complète
+	├── README.md                 # Documentation du projet
+	│
+	├── data/
+	│   ├── processed_images/     # Images prétraitées
+	│   └── embeddings/           # Embeddings sauvegardés (optionnel)
+	│
+	└── requirements.txt          # Liste des dépendances (optionnel)
 
 🛠 Technologies utilisées
-🔹 Computer Vision
+	🔹 Computer Vision
+	
+		- ResNet50 (torchvision)
+		
+		- HOG, LBP (scikit-image)
+		
+		- PIL
 
-ResNet50 (torchvision)
-
-HOG, LBP (scikit-image)
-
-PIL
-
-🔹 NLP
-
-Sentence-BERT (sentence-transformers)
-
-Word2Vec (gensim)
-
-TF-IDF (scikit-learn)
-
-🔹 Similarité & Indexation
-
-FAISS (IndexFlatIP)
-
-Cosine Similarity
-
-🔹 Interfaces
-
-Streamlit
+	🔹 NLP
+	
+		- Sentence-BERT (sentence-transformers)
+		
+		- Word2Vec (gensim)
+		
+		- TF-IDF (scikit-learn)
+	
+	🔹 Similarité & Indexation
+	
+		- FAISS (IndexFlatIP)
+	
+		- Cosine Similarity
+	
+	🔹 Interfaces
+	
+	- Streamlit
