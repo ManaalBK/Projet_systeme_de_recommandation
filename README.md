@@ -1,70 +1,75 @@
-👜 Multimodal Recommendation System (Image + Text) — Chanel Product Dataset
+# 👜 Multimodal Recommendation System (Image + Text)  
+### Chanel Product Dataset
 
-Ce projet implémente une application Streamlit permettant de rechercher et recommander des produits Chanel à partir :
+Ce projet implémente une **application Streamlit** permettant de rechercher et recommander des produits Chanel à partir :
 
-	* d’une image (similarité visuelle),
+- 🖼️ **d’une image** (similarité visuelle)
+- 📝 **d’un texte ou d’une description** (similarité sémantique)
+- 🔗 **d’une combinaison image + texte** (fusion multimodale)
 
-	* d’un texte ou description (similarité sémantique),
+Il s’agit d’un système complet de **Computer Vision**, **NLP**, **extraction d’embeddings** et **recherche par similarité**, utilisant **FAISS**, **ResNet50**, **LBP/HOG**, **Word2Vec**, **TF-IDF** et **Sentence-BERT**.
 
-	* ou d’une combinaison image + texte (fusion multimodale).
+---
 
-Il s’agit d’un système complet de traitement d’images, NLP, extraction d’embeddings, et recherche par similarité utilisant FAISS, ResNet50, LBP/HOG, Word2Vec, TF-IDF, et Sentence-BERT.
+## 🚀 Fonctionnalités principales
 
-🚀 Fonctionnalités principales
-🔹 1. Chargement dataset
+### 🔹 1. Chargement du dataset
 
-	* Téléchargement automatique du dataset depuis HuggingFace : DBQ/Chanel.Product.prices.Germany Ou upload d’un fichier CSV
-	* Sélection manuelle des colonnes (imageurl, title, catégories, prix)
+- Téléchargement automatique depuis **HuggingFace** :  
+  `DBQ/Chanel.Product.prices.Germany`
+- Possibilité d’**uploader un fichier CSV**
+- Sélection manuelle des colonnes :
+  - `imageurl`
+  - `title`
+  - catégories
+  - prix
 
-🔹 2. Nettoyage intelligent
+---
 
-	* Suppression des titres vides/courts
+### 🔹 2. Nettoyage intelligent des données
 
-	* Suppression des doublons
+- Suppression des titres vides ou trop courts
+- Suppression des doublons
+- Mise en minuscules
+- Filtrage des lignes sans image ou description valide
 
-	* Mise en minuscules
+---
 
-	* Filtrage des lignes sans images ou descriptions valides
+### 🔹 3. Téléchargement et prétraitement des images
 
-🔹 3. Téléchargement et prétraitement d’images
+- Téléchargement des images du dataset
+- Sauvegarde locale dans `data/processed_images/`
+- Redimensionnement uniforme en **224 × 224**
+- Possibilité de travailler sur un **échantillon** du dataset
 
-	* Téléchargement des images du dataset
+---
 
-	* Sauvegarde en local (data/processed_images/)
+### 🔹 4. Extraction des embeddings
 
-	* Redimensionnement uniforme (224x224)
+#### 🖼️ Embeddings visuels
+- **ResNet50** — 2048 dimensions
+- **LBP** — descripteurs de texture
+- **HOG** — descripteurs de forme
 
-	* Option d’échantillonnage
+#### 📝 Embeddings textuels
+- **Sentence-BERT** (`all-MiniLM-L6-v2`)
+- **Word2Vec** (entraîné sur le dataset)
+- **TF-IDF**
 
-🔹 4. Extraction des embeddings
+---
 
-	* Embeddings visuels :
+### 🔹 5. Recherche et recommandation
 
-		- ResNet50 (2048D)
+- Recherche par **image**
+- Recherche par **texte**
+- Recherche par **fusion multimodale** (Image + Texte)
+- Pondération configurable entre image et texte
+- Visualisation interactive des résultats dans Streamlit
 
-		- LBP (texture)
+---
 
-		- HOG (shape)
+## 🏗 Architecture du projet
 
-	* Embeddings textuels :
-
-		- Sentence-BERT (all-MiniLM-L6-v2)
-
-		- Word2Vec (self-trained)
-
-		- TF-IDF
-
-🔹 5. Recherche et recommandation
-
-	* Recherche par image
-
-	* Recherche par texte
-
-	* Recherche par fusion multimodale ( combiné==> (Image + Texte) )
-
-Visualisation des résultats
-
-🏗 Architecture du projet
 	📁 project/
 	│
 	├── app1.py                   # Application Streamlit complète
@@ -76,29 +81,30 @@ Visualisation des résultats
 	│
 	└── requirements.txt          # Liste des dépendances (optionnel)
 
-🛠 Technologies utilisées
-	🔹 Computer Vision
-	
-		- ResNet50 (torchvision)
-		
-		- HOG, LBP (scikit-image)
-		
-		- PIL
+## 🛠 Technologies utilisées
 
-	🔹 NLP
-	
-		- Sentence-BERT (sentence-transformers)
-		
-		- Word2Vec (gensim)
-		
-		- TF-IDF (scikit-learn)
-	
-	🔹 Similarité & Indexation
-	
-		- FAISS (IndexFlatIP)
-	
-		- Cosine Similarity
-	
-	🔹 Interfaces
-	
+### 🔹 Computer Vision
+- ResNet50 (torchvision)
+- HOG, LBP (scikit-image)
+- PIL
+
+### 🔹 NLP
+- Sentence-BERT (sentence-transformers)
+- Word2Vec (gensim)
+- TF-IDF (scikit-learn)
+
+### 🔹 Similarité & Indexation
+- FAISS (`IndexFlatIP`)
+- Cosine Similarity
+
+### 🔹 Interface utilisateur
+- **Streamlit**
+
+---
+
+## 📦 Installation
+
+```bash
+pip install -r requirements.txt
+
 	- Streamlit
