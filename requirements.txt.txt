@@ -1,1 +1,0 @@
-pip install streamlit pandas numpy matplotlib seaborn pillow requests tqdm scikit-learn torchvision torch sentence-transformers gensim scikit-image faiss-cpu datasets umap-learn
